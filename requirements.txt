@@ -1,6 +1,6 @@
-fastapi
-uvicorn
-pymongo
-spacy
-python-dotenv
-requests
+fastapi==0.95.2
+uvicorn==0.0.10
+pymongo==4.0
+spacy==2.1.0
+python-dotenv==0.13.0
+requests==2.19.1
