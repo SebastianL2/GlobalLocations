@@ -23,7 +23,7 @@ archive.zip
 # vim temporary files
 *~
 .*.sw?
-.env
+
 .DS_Store
 .vscode
 .vercel
