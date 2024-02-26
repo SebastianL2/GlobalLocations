@@ -1,9 +1,9 @@
 {
-    "version": 2,
+    "devCommand": "uvicorn app:app --host 0.0.0.0 --port 3000",
     "builds": [
         {
             "src": "./app.py",
-            "use": "@vercel/python"
+            "use": "vercel-sapper"
         }
     ],
     "routes": [
