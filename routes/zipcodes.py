@@ -60,11 +60,20 @@ async def read_zipcode(zipcode: str = Path(..., min_length=1), request: Request 
             response = get(
                 'https://app.zipcodebase.com/api/v1/search', headers=headers, params=params)
             data = response.json()
+            if response.status_code == 200:
+                # Procesa la respuesta y agrega la información a la base de datos local
+                data = response.json()
+                zipcodes_array = data["results"][f"{zipcode}"]
 
-            zipcodes_array = data["results"][f"{zipcode}"]
-
-            location_added = []
-
+                location_added = []
+            else:
+               return {
+                "message": "Error al obtener datos de la API externa",
+                "status": response.status_code,
+                "valid": False,
+                "zipcode": [],
+                "code": code
+               }
             if isinstance(zipcodes_array, list):
                 for zip in zipcodes_array:
                     country = get_country_name(zip["country_code"])
@@ -97,6 +106,7 @@ async def read_zipcode(zipcode: str = Path(..., min_length=1), request: Request 
             "zipcode": list(location_array),
             "code": code
         }
+                
     except TypeError as e:
         print(e.args)
         return {
